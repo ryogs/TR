@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ryota</title>
+  <meta name="description" content="Ryota — tryna be good boy / throw me money." />
+  <style>
+    :root{
+      --bg:#f7f5ef;          /* オフホワイト */
+      --text:#153f3b;        /* いい感じの深ティール */
+      --muted:#3b5f5a;       /* 補助色（薄めのテキスト） */
+      --accent:#1a7f76;      /* リンク/ボタン色 */
+      --accent-hover:#14655d;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, sans-serif;
+      font-weight:700; /* Helvetica Bold */
+      letter-spacing: .01em;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6vw 5vw;
+    }
+    .card{
+      width:100%;
+      max-width:720px;
+      line-height:1.2;
+    }
+    h1{
+      margin:0 0 .6em;
+      font-size: clamp(28px, 7vw, 64px);
+    }
+    p{
+      margin:.4em 0;
+      font-size: clamp(16px, 3.6vw, 22px);
+      color:var(--muted);
+      font-weight:600; /* 見出しより少し軽く */
+    }
+    .stack{margin:1.2em 0 2em}
+    a{
+      color:var(--accent);
+      text-decoration:none;
+      border-bottom:2px solid currentColor;
+      padding-bottom:2px;
+    }
+    a:hover{color:var(--accent-hover)}
+    .btn{
+      display:inline-block;
+      border:none;
+      border-radius:999px;
+      padding:.9em 1.4em;
+      font-size: clamp(16px, 3.8vw, 20px);
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      transition:.15s transform ease, .15s background ease;
+      letter-spacing:.02em;
+    }
+    .btn:hover{background:var(--accent-hover); transform: translateY(-1px)}
+    .meta{
+      margin-top:1.6em;
+      font-size: clamp(12px, 3vw, 14px);
+      color:var(--muted);
+      font-weight:600;
+    }
+    /* 余白とバランス微調整（好みで） */
+    @media (min-width: 720px){
+      .card{padding:0 .2rem}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-label="Profile">
+      <h1>Ryota</h1>
+
+      <div class="stack">
+        <p>tryna be good boy</p>
+        <p>throw me money.</p>
+      </div>
+
+      <div class="stack">
+        <a class="btn" href="https://paypal.me/Ryotym?locale.x=en_US&amp;country.x=JP" target="_blank" rel="noopener">Send via PayPal</a>
+      </div>
+
+      <div class="meta">
+        <p>
+          <a href="mailto:grrgrr19991@gmail.com">grrgrr19991@gmail.com</a>
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

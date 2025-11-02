@@ -1,92 +1,136 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ryota</title>
-  <style>
-    :root {
-      --bg: #efede8;   /* 生成り紙 */
-      --text: #1e1e1e; /* 印刷黒 */
-      --muted: #3f3f3f;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ryota</title>
+<style>
+  :root{
+    --bg:#fff;
+    --text:#0a0a0a;
+    --muted:#585858;
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* 濃いめ半透明ボタン */
+    --glass:   rgba(255,255,255,.94);
+    --glass-h: rgba(255,255,255,.97);
+    --glass-a: rgba(255,255,255,.90);
+    --focus:   rgba(0,0,0,.12);
+  }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-weight: 700;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family: Helvetica,"Helvetica Neue",Arial,sans-serif;
+    font-weight:700;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    /* 上詰め・左右少なめ・下は余白 */
+    padding:4vw 3.5vw 10vh;
+  }
 
-    .poster {
-      width: 90%;
-      max-width: 640px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 2rem;
-      line-height: 1.2;
-    }
+  /* ちょい雑：下線を破線っぽく／位置を微ズラし */
+  header{
+    margin-bottom:2.2rem;
+    transform: translateY(-2px) rotate(-0.1deg);
+  }
+  header a{
+    font-size:clamp(17px,4.4vw,26px);
+    font-weight:600;
+    color:var(--text);
+    text-decoration:none;
+    border-bottom:2px dashed #707070;
+    padding-bottom:2px;
+    letter-spacing:-0.005em;
+  }
 
-    h1 {
-      font-size: clamp(40px, 9vw, 100px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 0.9;
-      margin-left: auto;
-      text-align: right;
-    }
+  main{
+    display:flex;flex-direction:column;align-items:flex-start;
+    gap:0.9rem; /* 均一じゃなく見える程度に狭め */
+    max-width:680px;
+  }
 
-    p {
-      font-size: clamp(14px, 3vw, 18px);
-      font-weight: 400;
-      color: var(--muted);
-      width: 70%;
-    }
+  /* 行ごとに微妙にトーンと位置をズラす */
+  .line{ 
+    font-weight:600;
+    color:var(--muted);
+    font-size:clamp(15px,3.6vw,20px);
+    line-height:1.28;
+    letter-spacing:0.01em;
+  }
+  .line:nth-child(1){ transform:translateX(0.5px) }
+  .line:nth-child(2){ transform:translateX(2px); color:#616161 }
+  .line:nth-child(3){ transform:translateX(-1px); color:#545454 }
 
-    a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 600;
-      border-bottom: 1.5px solid var(--text);
-      padding-bottom: 1px;
-    }
+  /* ピル型・枠なし・濃いめ半透明＋ブラー */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:52px; min-width:312px;
+    padding:1.05em 3.1em;
+    border-radius:9999px;
+    background:var(--glass);
+    color:var(--text);
+    text-decoration:none;
+    font-size:clamp(15px,3.2vw,18px);
+    font-weight:700; letter-spacing:.02em;
+    border:none;
+    box-shadow:
+      0 2px 12px rgba(0,0,0,.14),
+      inset 0 1px 0 rgba(255,255,255,.65);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
+    transition: background .15s ease, transform .08s ease, box-shadow .15s ease;
+    -webkit-tap-highlight-color:transparent;
+    /* わずかに左にずらす＝“置いた感” */
+    transform: translateX(-1px);
+    margin-top:.6rem;
+  }
+  .btn:hover{
+    background:var(--glass-h);
+    transform:translateX(-1px) translateY(-1px);
+    box-shadow:0 4px 18px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.75);
+  }
+  .btn:active{
+    background:var(--glass-a);
+    transform:translateX(-1px) translateY(0) scale(.99);
+  }
+  .btn:focus-visible{
+    outline:none;
+    box-shadow:
+      0 0 0 3px var(--focus),
+      0 2px 12px rgba(0,0,0,.14),
+      inset 0 1px 0 rgba(255,255,255,.65);
+  }
 
-    footer {
-      margin-top: 3rem;
-      font-size: clamp(10px, 2.5vw, 13px);
-      font-weight: 500;
-      color: var(--muted);
-      align-self: flex-end;
-    }
+  /* フッターは小さく・左下に寄せる */
+  footer{
+    margin-top:10vh;
+    font-size:clamp(10px,2.4vw,12px);
+    font-weight:600;
+    color:#6a6a6a;
+    letter-spacing:.02em;
+    transform: translateX(-0.5px) rotate(0.05deg);
+  }
 
-    @media (min-width: 600px) {
-      .poster {
-        align-items: flex-end;
-        text-align: right;
-      }
-      p {
-        width: 60%;
-      }
-    }
-  </style>
+  @media (prefers-reduced-motion: reduce){
+    .btn{transition:none}
+  }
+</style>
 </head>
 <body>
-  <section class="poster">
-    <h1>Ryota</h1>
-    <p>tryna be good boy<br>throw me money.</p>
-    <a href="https://paypal.me/Ryotym?locale.x=en_US&country.x=JP" target="_blank" rel="noopener">Send via PayPal</a>
-    <footer>grrgrr19991@gmail.com</footer>
-  </section>
+  <header>
+    <a href="mailto:grrgrr19991@gmail.com">grrgrr19991@gmail.com</a>
+  </header>
+
+  <main>
+    <p class="line">I'm open to any service, product or help</p>
+    <p class="line">Tokyo</p>
+    <p class="line">Or you can just throw me money</p>
+
+    <a class="btn" href="https://paypal.me/Ryotym?locale.x=en_US&country.x=JP"
+       target="_blank" rel="noopener" aria-label="Pay with PayPal">PayPal</a>
+  </main>
+
+  <footer>Ryota</footer>
 </body>
 </html>
